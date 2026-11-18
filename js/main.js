@@ -629,6 +629,11 @@
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+    // The font stylesheet does not block the page, so fonts can arrive after the first layout.
+    // Measure again whenever a batch of them finishes loading.
+    if (document.fonts.addEventListener) {
+      document.fonts.addEventListener('loadingdone', function () { ScrollTrigger.refresh(); });
+    }
   }
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
 })();

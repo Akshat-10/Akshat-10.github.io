@@ -574,6 +574,7 @@
     window.addEventListener('resize', function () { resize(); still(); });
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(still);
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', still);
     resize();
     draw(performance.now());
     watch(canvas, function (visible) { onScreen = visible; if (visible) { resize(); start(); still(); } else stop(); });
